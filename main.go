@@ -27,7 +27,6 @@ func main() {
 	if user.TwoFactor == 1 {
 		defaultTOTPUsage(user.UUID)
 	}
-
 	panic("login success")
 
 }
@@ -35,8 +34,8 @@ func main() {
 func openConnection() {
 
 	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
-		"qg2paymentusr",
-		"H7eHPauxNW65",
+		"user",
+		"pass",
 		"localhost",
 		"3306",
 		"payments")
@@ -63,6 +62,7 @@ func defaultLogin() lib.User {
 	pass = GetMD5Hash(pass)
 	fmt.Println("hash md5 pass", pass)
 
+	// query
 	query := MySQL
 	query = query.Table("payments_users.users")
 	query = query.Where("payments_users.users.email = ?", email)
