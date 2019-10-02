@@ -1,6 +1,6 @@
 package lib
 
-//TwoFactor is for
+//TwoFactor exported
 type TwoFactor struct {
 	KeySecret string `json:"key_secret"`
 }
