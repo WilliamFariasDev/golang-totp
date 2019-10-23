@@ -32,7 +32,6 @@ func main() {
 }
 
 func openConnection() {
-
 	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		"user",
 		"pass",
@@ -44,7 +43,6 @@ func openConnection() {
 	if err != nil {
 		panic(err.Error())
 	}
-
 	MySQL = conn
 }
 
@@ -116,6 +114,8 @@ func GetMD5Hash(text string) string {
 
 func register() {
 
+	file, _ := os.Create("qr2.png")
+	defer file.Close()
 	keySecret := gotp.RandomSecret(16)
 	otp := gotp.NewDefaultTOTP(keySecret)
 
@@ -123,9 +123,7 @@ func register() {
 
 	qrCode, _ := qr.Encode(qrcodeURL, qr.M, qr.Auto)
 	qrCode, _ = barcode.Scale(qrCode, 256, 256)
-	file, _ := os.Create("qr2.png")
 
-	defer file.Close()
 	png.Encode(file, qrCode)
 
 	fmt.Println("Digito o token")
